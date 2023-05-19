@@ -10,8 +10,10 @@ const db = require("./src/db/db");
 
 db();
 
+const routes = require("./src/routes/router");
+
+app.use("/api", routes);
+
 app.listen(3000, function(){
     console.log("Server online");
 }); 
-
-// senha banco 6lk15DKV0w2J6JPK
