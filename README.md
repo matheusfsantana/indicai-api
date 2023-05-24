@@ -9,3 +9,5 @@ npm install --save-dev nodemon
 npm install mongoose --save
 
 npm install cors --save
+
+npm install dotenv --save

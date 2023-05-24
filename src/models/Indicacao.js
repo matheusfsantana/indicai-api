@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 
-const { indicacaoSchema } = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const indicacaoSchema  = new Schema({
     image: {
         type: String,
         required: true
     },
-    nome: {
+    endereco: {
         type: String,
         required: true
     },
@@ -33,7 +35,7 @@ const { indicacaoSchema } = new mongoose.Schema({
 
 const Indicacao = mongoose.model("Indicacao", indicacaoSchema);
 
-moudle.exports = 
+module.exports = 
 {
     Indicacao,
     indicacaoSchema

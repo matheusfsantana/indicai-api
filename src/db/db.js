@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
+const connectionString = process.env.DB_URI;
 
 async function main(){
     
     try{
-        //banco de dados "exposto" apenas para teste, trocar banco,senha e user para variavel de ambiente dps
-        // senha banco 6lk15DKV0w2J6JPK
         await mongoose.connect(
-            "mongodb+srv://matheusfsantana:6lk15DKV0w2J6JPK@cluster0.1qylkbe.mongodb.net/?retryWrites=true&w=majority"
+            connectionString
         );
 
         console.log("DB Connected!");
