@@ -8,6 +8,7 @@ const indicacaoSchema  = new Schema({
         required: true
     },
     endereco: {
+        //rua + bairro + cidade
         type: String,
         required: true
     },
@@ -23,11 +24,11 @@ const indicacaoSchema  = new Schema({
         type: {
             type: String,
             enum: ['Point'], 
-            required: true
+            required: false
         },
         coordinates: {
             type: [Number], //[longitude,latitude]
-            required: true
+            required: false
         }
     }
 
