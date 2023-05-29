@@ -32,7 +32,10 @@ const indicacaoSchema  = new Schema({
         }
     }
 
+
 }, { collection: 'indicacao' });
+
+indicacaoSchema.index({ localizacao: '2dsphere' });
 
 const Indicacao = mongoose.model("Indicacao", indicacaoSchema);
 
