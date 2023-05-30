@@ -69,7 +69,7 @@ const indicacaoController = {
       res.json(result);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error while fetching data.' });
+      res.status(500).json({ error: error.message });
     }
   },
 
@@ -79,12 +79,15 @@ const indicacaoController = {
       const longitude = parseFloat(req.query.longitude);
       const latitude = parseFloat(req.query.latitude);
      
+
+      //exemplo de rota:
+      //url/api/near?longitude=-8.0584933&latitude=-34.8848193
       const result = await Indicacao.find({
         localizacao: {
           $near: {
             $geometry: {
               type: 'Point',
-              coordinates: [parseFloat(longitude), parseFloat(latitude)],
+              coordinates: [longitude, latitude],
             },
           $maxDistance: 10000
           },
@@ -94,6 +97,49 @@ const indicacaoController = {
     } catch (error) {
       console.log(error);
       res.status(500).json( `${error}`);
+    }
+  },
+
+  getFilterData: async (req, res) =>{
+   
+    try {
+
+      const search = req.query.item;
+
+      const escapedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+      const regex = new RegExp(`\\b${escapedSearch}\\w*\\b`, 'gi');
+    
+      //exemplo de rota:
+      //url/api/search?item=rec
+      const resultados = await Indicacao.find({ 
+        $or: [
+          {categoria: regex},
+          {endereco: regex }
+        ]
+      }).exec();
+  
+      res.json(resultados);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Ocorreu um erro ao executar a pesquisa' });
+    }
+  },
+
+  getFilterCategoria: async (req,res) =>{
+    try {
+      const search  = req.query.items;
+  
+      const searchArray = search.split(',');
+
+      //o nome na url deve estar exatamente igual ao banco de dados (sem espaços dps da virgula e com a primeira letra maiuscula)
+      //url/api/categorias?items=Alimentacao,Pores do sol,Natureza
+      const resultados = await Indicacao.find({ categoria: {$in: searchArray}  });
+  
+      res.json(resultados);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Ocorreu um erro ao filtrar a string de busca' });
     }
   }
 };

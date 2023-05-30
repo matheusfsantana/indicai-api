@@ -11,4 +11,10 @@ router.route("/indicacao")
 router.route("/near")
     .get(indicacaoController.getNearLocations);
 
+router.route("/search")
+    .get(indicacaoController.getFilterData);
+
+router.route("/categorias")
+    .get(indicacaoController.getFilterCategoria);
+
 module.exports = router;
