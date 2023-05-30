@@ -13,3 +13,5 @@ npm install cors --save
 npm install dotenv --save
 
 npm install opencage-api-client
+
+npm i bcrypt 

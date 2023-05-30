@@ -4,6 +4,8 @@ const indicacaoRouter = require("./indicacaoRoutes");
 
 router.use("/", indicacaoRouter);
 
-/*const userRoutes = require("./userRoutes");*/
+const userRoutes = require("./userRoutes");
+
+router.use("/user", userRoutes);
 
 module.exports = router;

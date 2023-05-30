@@ -59,6 +59,7 @@ const indicacaoController = {
       await session.abortTransaction();
       session.endSession();
       console.log(error);
+      res.status(500).json({msg: "Não foi possivel criar a indicação"})
     }
   },
 
