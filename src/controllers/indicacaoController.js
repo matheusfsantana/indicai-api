@@ -116,7 +116,8 @@ const indicacaoController = {
       const resultados = await Indicacao.find({ 
         $or: [
           {categoria: regex},
-          {endereco: regex }
+          {endereco: regex },
+          {descricao: regex}
         ]
       }).exec();
   
