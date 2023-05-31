@@ -147,7 +147,7 @@ const indicacaoController = {
 
   getIndicacaoById: async (req, res) => {
     try {
-      const { photoId } = req.params;
+      const photoId = req.params.id;
       const photoData = await Indicacao.findById(photoId);
       res.status(200).send(photoData);
     } catch(error) {
