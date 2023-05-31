@@ -143,6 +143,16 @@ const indicacaoController = {
       console.error(error);
       res.status(500).json({ error: 'Ocorreu um erro ao filtrar a string de busca' });
     }
+  },
+
+  getIndicacaoById: async (req, res) => {
+    try {
+      const { photoId } = req.params;
+      const photoData = await Indicacao.findById(photoId);
+      res.status(200).send(photoData);
+    } catch(error) {
+      console.log(error.message)
+    }
   }
 };
 

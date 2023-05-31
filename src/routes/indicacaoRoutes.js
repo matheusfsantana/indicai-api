@@ -8,6 +8,9 @@ router
 router.route("/indicacao")
     .get(indicacaoController.getAll);
 
+router.route("/indicacao/:id")
+    .get(indicacaoController.getIndicacaoById)
+
 router.route("/near")
     .get(indicacaoController.getNearLocations);
 
