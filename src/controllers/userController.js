@@ -161,7 +161,7 @@ const userController = {
 
     getUserBydId: async(req,res) =>{
         try{
-            const { email } = req.body;
+            const email  = req.params.email;
 
             const user = await User.findOne({ email: email });
 
