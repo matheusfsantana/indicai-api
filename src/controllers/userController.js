@@ -112,7 +112,7 @@ const userController = {
                 res.status(409).json({ erros: erros });
             } else {
                 const userData = user.toJSON()
-                res.status(200).json(userData.name);
+                res.status(200).json(userData);
             }
         } catch (error) {
             res.status(500).json("Não foi possivel completar o login");
@@ -170,7 +170,7 @@ const userController = {
             }
 
             const userData = user.toJSON()
-            return res.status(200).json({userData});
+            return res.status(200).json(userData);
         } catch (error) {
             console.log(error);
             res.status(500).json({ mensagem: "Não foi possível buscar o usuário", erro: {error}});
