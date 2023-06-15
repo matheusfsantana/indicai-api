@@ -16,5 +16,9 @@ router
 router
     .route("/deleteUser")
     .delete((req,res) => userController.deleteUser(req,res));
+
+router
+    .route("/getUserById")
+    .get((req,res) => userController.getUserBydId(req,res));
     
 module.exports = router;

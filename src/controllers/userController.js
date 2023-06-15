@@ -157,6 +157,24 @@ const userController = {
             console.log(error);
             res.status(500).json({ mensagem: "Não foi possível deletar o usuário", erro: {error}});
         }
+    },
+
+    getUserBydId: async(req,res) =>{
+        try{
+            const { email } = req.body;
+
+            const user = await User.findOne({ email: email });
+
+            if(!user){
+                return res.status(404).json({ mensagem: "Usuário não encontrado" });
+            }
+
+            const userData = user.toJSON()
+            return res.status(200).json({userData});
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ mensagem: "Não foi possível buscar o usuário", erro: {error}});
+        }
     }
 }
 
