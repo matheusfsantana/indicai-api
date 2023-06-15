@@ -117,6 +117,46 @@ const userController = {
         } catch (error) {
             res.status(500).json("Não foi possivel completar o login");
         }
+    },
+
+    editUser: async(req,res) =>{
+        try {
+            const { email,name } = req.body;
+    
+            const user = await User.findOne({ email: email });
+    
+            if (!user) {
+                return res.status(404).json({ mensagem: "Usuário não encontrado" });
+            }
+    
+            user.name = name.trim();
+    
+            await user.save();
+    
+            res.status(200).json({ mensagem: "Usuário atualizado com sucesso" });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ mensagem: "Não foi possível atualizar o usuário" });
+        }
+           
+    },
+    
+    deleteUser: async(req,res) =>{
+        try {
+            const { email } = req.body;
+
+            const user = await User.findOne({ email: email });
+
+            if(!user){
+                return res.status(404).json({ mensagem: "Usuário não encontrado" });
+            }
+
+            await User.deleteOne(user);
+            return res.status(200).json({ mensagem: "Usuário deletado" });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ mensagem: "Não foi possível deletar o usuário", erro: {error}});
+        }
     }
 }
 

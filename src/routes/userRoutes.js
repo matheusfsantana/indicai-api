@@ -8,5 +8,13 @@ router
 router
     .route("/login")
     .post((req,res) => userController.login(req,res));
+
+router
+    .route("/updateUser")
+    .put((req,res) => userController.editUser(req,res));
+
+router
+    .route("/deleteUser")
+    .delete((req,res) => userController.deleteUser(req,res));
     
 module.exports = router;
