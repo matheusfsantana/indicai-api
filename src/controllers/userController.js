@@ -122,11 +122,11 @@ const userController = {
     editUser: async(req,res) =>{
         try {
 
-            const { id, email,name, password} = req.body;
+            const { _id, email,name, password} = req.body;
 
             let data = []; //dados que forem atualizados
 
-            const user = await User.findById(id);
+            const user = await User.findById(_id);
 
             if (!user) {
                 return res.status(404).json({ mensagem: "Usuário não encontrado" });
