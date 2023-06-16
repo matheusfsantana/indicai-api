@@ -54,12 +54,12 @@ const indicacaoController = {
       await session.commitTransaction();
       session.endSession();
 
-      res.status(201).json({ response, msg: "indicação criada com sucesso" });
+      res.status(201).json({ response, mensagem: "indicação criada com sucesso" });
     } catch (error) {
       await session.abortTransaction();
       session.endSession();
       console.log(error);
-      res.status(500).json({msg: "Não foi possivel criar a indicação"})
+      res.status(500).json({mensagem: "Não foi possivel criar a indicação"})
     }
   },
 

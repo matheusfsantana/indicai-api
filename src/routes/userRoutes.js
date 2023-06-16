@@ -18,7 +18,7 @@ router
     .delete((req,res) => userController.deleteUser(req,res));
 
 router
-    .route("/getUserById/:email")
+    .route("/getUserById/:id")
     .get((req,res) => userController.getUserBydId(req,res));
     
 module.exports = router;

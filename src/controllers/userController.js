@@ -121,19 +121,40 @@ const userController = {
 
     editUser: async(req,res) =>{
         try {
-            const { email,name } = req.body;
-    
-            const user = await User.findOne({ email: email });
-    
+
+            const { id, email,name, password} = req.body;
+
+            let data = []; //dados que forem atualizados
+
+            const user = await User.findById(id);
+
             if (!user) {
                 return res.status(404).json({ mensagem: "Usuário não encontrado" });
             }
+
+            if(name)
+            {
+                user.name = name.trim();
+                data.push({"name": user.name});
+            }
+            if(email)
+            {
+                user.email = email.trim();
+                data.push({"email": user.email});
+            }
+            if(password)
+            {
+                const salt = await bcrypt.genSalt(12);
+                const passwordHash = await bcrypt.hash(password, salt);
+                user.password = passwordHash;
+                data.push({"password": password});
+            }
     
-            user.name = name.trim();
+            
     
             await user.save();
     
-            res.status(200).json({ mensagem: "Usuário atualizado com sucesso" });
+            res.status(200).json({ mensagem: "Usuário atualizado com sucesso", data});
         } catch (error) {
             console.log(error);
             res.status(500).json({ mensagem: "Não foi possível atualizar o usuário" });
@@ -161,9 +182,9 @@ const userController = {
 
     getUserBydId: async(req,res) =>{
         try{
-            const email  = req.params.email;
+            const userId  = req.params.id;
 
-            const user = await User.findOne({ email: email });
+            const user = await User.findById(userId);
 
             if(!user){
                 return res.status(404).json({ mensagem: "Usuário não encontrado" });
