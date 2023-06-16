@@ -164,9 +164,9 @@ const userController = {
     
     deleteUser: async(req,res) =>{
         try {
-            const { email } = req.body;
+            const { _id } = req.body;
 
-            const user = await User.findOne({ email: email });
+            const user = await User.findById(_id);
 
             if(!user){
                 return res.status(404).json({ mensagem: "Usuário não encontrado" });
