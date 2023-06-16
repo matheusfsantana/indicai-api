@@ -164,7 +164,7 @@ const userController = {
     
     deleteUser: async(req,res) =>{
         try {
-            const { _id } = req.body;
+            const _id  = req.body;
 
             const user = await User.findById(_id);
 
